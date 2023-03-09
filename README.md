@@ -1,0 +1,1 @@
+this is a game in which the player can control a snake with arrow keys
