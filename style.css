@@ -1,50 +1,50 @@
+
 body {
-    background-color: black;
     display: flex;
     flex-direction: row;
-    justify-content: center;
-    align-items: center;
-    margin-top: 100px;
-    margin-bottom: 50px;
     font-family: 'Press Start 2P', cursive;
+    text-align: center;
+    justify-content: space-around;
+    background-color: rgb(68, 84, 61);
+    color: rgb(39, 39, 39);
 }
 
-#center-window {
+#center-div {
     display: flex;
     flex-direction: column;
     align-items: center;
 }
 
-#game-board {
-    color: black;
-    border: 1px solid white;
-    height: 500px;
-    width: 500px;
+td {
+    background-color: rgb(68, 84, 61);
+    height: 15px;
+    width: 15px;
+    border: 0px;
+    margin: 0px;
+    
 }
 
-#snake-head {
-    background-color: lime;
-    margin: auto;
-    height: 20px;
-    width: 20px;
-    position: relative;
-    top: 250px;
-    right: 0px;
+#table {
+    background-color: rgb(68, 84, 61);
+    border: solid 2px rgb(39, 39, 39);
+    
+}
+
+.food {
+    background-color: rgb(161, 57, 57);
+}
+
+.snake-body {
+    background-color: rgb(39, 39, 39);
 }
 
 #start {
-    background-color: rgb(71, 110, 71);
-    color: rgb(50, 50, 50);
-    height: 40px;
-    width: 110px;
-    margin-top: 20px;
+    width: 150px;
+    margin-top: 15px;
+    height: 30px;
     font-family: 'Press Start 2P', cursive;
+    background-color: rgb(39, 39, 39);
+    color: rgb(68, 84, 61);
     font-size: larger;
 }
 
-#food {
-    background-color: red;
-    height: 10px;
-    width: 10px;
-    position: relative;
-}
