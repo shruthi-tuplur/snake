@@ -9,16 +9,34 @@ const numColumns = 25;
 const startingRow = Math.floor(numRows / 2);
 const startingColumn = Math.floor(numColumns / 2);
 
+let snakeGrows = false;
+
 let currentRow = startingRow;
 let currentColumn = startingColumn;
+
+let snake = {
+    'body': [[startingRow, startingColumn]],
+    'currentDirection': [0, -1]
+}
+
 
 let foodStartingRow = Math.floor(Math.random() * numRows);
 let foodStartingColumn = Math.floor(Math.random() * numColumns);
 
-let currentDirection = 'left';
-let numSegments = 4;
+let gameState = {
+    'food': [foodStartingRow, foodStartingColumn],
+    'snake': snake
+}
 
-let deleteColumn;
+let body = snake['body'];
+
+
+let currentDirection = snake['currentDirection']
+
+
+
+let score = 0;
+let scoreDisplay;
 
 window.onload = function() {
     for (let i = 0; i < numRows; i++) {
@@ -39,158 +57,94 @@ window.onload = function() {
         }
         table.appendChild(newRow);
     }
+    scoreDisplay = document.getElementById('score');
+    scoreDisplay.innerText = `SCORE: ${score}`;
 }
-
-
-
 
 
 function move() {
-
-    
     snakeAte();
-    let currentSnakeRow = table.getElementsByTagName('tr')[currentRow];
-    let currentSnakeColumn = currentSnakeRow.getElementsByTagName('td')[currentColumn];
+
+    if(snakeGrows){
+        let newSegmentLocation = [body[0][0] + currentDirection[0], body[0][1] + currentDirection[1]];
+        body.unshift(newSegmentLocation);
+        let newSegmentSquare = table.getElementsByTagName('tr')[newSegmentLocation[0]].getElementsByTagName('td')[newSegmentLocation[1]];
+        newSegmentSquare.classList.add('snake-body');
+        snakeGrows = false;
+
+    } else {
+
+    let head = body[0];
+    let tail = body[body.length - 1];
+
+    let newSegmentLocation = [head[0] + currentDirection[0], head[1] + currentDirection[1]];
+    body.unshift(newSegmentLocation);
+    let newSegmentSquare = table.getElementsByTagName('tr')[newSegmentLocation[0]].getElementsByTagName('td')[newSegmentLocation[1]];
+    newSegmentSquare.classList.add('snake-body');
 
     
-
-        if (currentDirection === 'left') {
-            for (let i = 1; i <= numSegments; i++) {
-
-                let newNum = currentColumn - 1
-                let newSnakeColumn = currentSnakeRow.getElementsByTagName('td')[newNum];
-                
-                newSnakeColumn.classList.add('snake-body');
-
-                deleteColumn = currentSnakeRow.getElementsByTagName('td')[newNum + numSegments];
-                deleteColumn.classList.remove('snake-body');
-
-                currentColumn -= 1;
-        }
-        }
-            
-        
-        
+    let segToRemove = body[body.length - 1];
     
+    let segToRemoveRow = segToRemove[0];
+    let segToRemoveColumn = segToRemove[1];
 
-    else if (currentDirection === 'right') {
-        for (let i = 1; i <= numSegments; i++) {
-
-            let newNum = currentColumn + 1
-            let newSnakeColumn = currentSnakeRow.getElementsByTagName('td')[newNum];
-        
-            newSnakeColumn.classList.add('snake-body');
-
-            deleteColumn = currentSnakeRow.getElementsByTagName('td')[newNum - numSegments];
-            deleteColumn.classList.remove('snake-body');
-
-            currentColumn += 1;
-        }
-    }
-
-    else if (currentDirection === 'up') {
-        for (let i = 1; i <= numSegments; i++) {
-        let newRow = currentRow - 1;
-        let newSnakeRow = table.getElementsByTagName('tr')[newRow];
-        let newSnakeSquare = newSnakeRow.getElementsByTagName('td')[currentColumn]
+    let segToRemoveSquare = table.getElementsByTagName('tr')[segToRemoveRow].getElementsByTagName('td')[segToRemoveColumn];
     
-        
-        newSnakeSquare.classList.add('snake-body');
-
-        let deleteRow = table.getElementsByTagName('tr')[newRow + numSegments];
-        let deleteSquare = deleteRow.getElementsByTagName('td')[currentColumn];
-        deleteSquare.classList.remove('snake-body');
-
-        currentRow -= 1;
-        }
-    }
-
-    else if (currentDirection === 'down') {
-        for (let i = 1; i <= numSegments; i++) {
-
-            let newRow = currentRow + 1;
-            let newSnakeRow = table.getElementsByTagName('tr')[newRow];
-            let newSnakeSquare = newSnakeRow.getElementsByTagName('td')[currentColumn]
-        
-            
-            newSnakeSquare.classList.add('snake-body');
-
-            let deleteRow = table.getElementsByTagName('tr')[newRow - numSegments];
-            let deleteSquare = deleteRow.getElementsByTagName('td')[currentColumn];
-            deleteSquare.classList.remove('snake-body');
-
-            currentRow += 1;
-
-    }
-    }
+    segToRemoveSquare.classList.remove('snake-body');
+    
+    
+    body.pop()
 }
     
 
-    
-
-    
-
+}
 
 function movingSnake() {
-    setInterval(move, 500);
-    ;
+    setInterval(move, 300);
 }
-
-function turnUp() {
-    currentDirection = 'up';
-}
-
-function turnDown() {
-    currentDirection = 'down';
-}
-
-function turnLeft() {
-    currentDirection = 'left';
-}
-
-function turnRight() {
-    currentDirection = 'right';
-}
-
 
 
 function snakeAte() {
-    
-    if (currentRow ==  foodStartingRow && currentColumn == foodStartingColumn) {
+    let food = gameState['food'];
+    let head = body[0];
+    let tail = body[body.length - 1];
+
+    if (head[0] === food[0] && head[1] === food[1]) {
+        snakeGrows = true;
+        score += 10;
+        scoreDisplay.innerText = `SCORE: ${score}`;
+
+        gameState['food'] = [Math.floor(Math.random() * numRows), Math.floor(Math.random() * numColumns)]
         
-        numSegments += 1;
-
-        let foodCurrentRow = table.getElementsByTagName('tr')[foodStartingRow];
-        
-        let foodCurrentSquare = foodCurrentRow.getElementsByTagName('td')[foodStartingColumn];
-        
-
-        console.log(foodCurrentRow)
-
-        foodCurrentSquare.classList.remove('food');
-        
-        foodStartingRow = Math.floor(Math.random() * numRows);
-        foodStartingColumn = Math.floor(Math.random() * numColumns);
-
-        let foodNewRow = table.getElementsByTagName('tr')[foodStartingRow];
-        let foodNewSquare = foodNewRow.getElementsByTagName('td')[foodStartingColumn];
-
-        foodNewSquare.classList.add('food');
     }
-
-}
+    
+    }
 
 startButton.addEventListener('click', movingSnake);
 
 document.addEventListener('keydown', function(event) {
+
+    
     if(event.code === 'ArrowDown'){
-        turnDown();
+        currentDirection = [1, 0];
     } else if(event.code === 'ArrowUp'){
-        turnUp();
+        currentDirection = [-1, 0];
     } else if(event.code === 'ArrowLeft'){
-        turnLeft();
+        currentDirection = [0, -1];
     } else if(event.code === 'ArrowRight'){
-        turnRight();
+        currentDirection = [0, 1];
+    } else if(event.code === 'Space'){ 
+        console.log(body);
+        currentDirection = [0, 0];
     }
 
 })
+
+// --------------------------------------------------------------------------------------------------------------------------------------------------
+
+// NONPLAYER FUNCTIONS 
+
+function died() {
+    let text = document.getElementById('text');
+    text.innerText = 'U DIED :( '
+}
