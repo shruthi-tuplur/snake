@@ -34,9 +34,13 @@ td {
     background-color: rgb(161, 57, 57);
 }
 
+
 .snake-body {
     background-color: rgb(39, 39, 39);
 }
+
+
+
 
 #start {
     width: 150px;
