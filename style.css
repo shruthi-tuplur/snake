@@ -7,12 +7,17 @@ body {
     justify-content: space-around;
     background-color: rgb(68, 84, 61);
     color: rgb(39, 39, 39);
+    height: 80vh;
 }
 
 #center-div {
     display: flex;
     flex-direction: column;
     align-items: center;
+}
+#game-div {
+    display: none;
+    flex-direction: column;
 }
 
 td {
@@ -25,7 +30,7 @@ td {
 }
 
 #table {
-    background-color: rgb(68, 84, 61);
+    
     border: solid 2px rgb(39, 39, 39);
     
 }
@@ -40,19 +45,68 @@ td {
 }
 
 
+.theme-button {
+    width: 125px;
+    height: 50px;
+    font-family: 'Press Start 2P', cursive;
+    background-color: rgb(39, 39, 39);
+    color: rgb(68, 84, 61);
+    font-size: medium;
+}
+
+.options-div {
+    margin-top: 50px;
+}
+
+.theme-buttons {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    width: 50vw;
+    justify-content: space-between;
+}
 
 
 #start {
+    display: flex;
     width: 150px;
     margin-top: 15px;
+    height: 30px;
+    padding-top: 5px;
+    font-family: 'Press Start 2P', cursive;
+    background-color: rgb(39, 39, 39);
+    color: rgb(68, 84, 61);
+    font-size: larger;
+    justify-content: center;
+}
+
+#reset-button {
+    display: none;
+    width: 150px;
+    margin-top: 15px;
+    padding-top: 5px;
     height: 30px;
     font-family: 'Press Start 2P', cursive;
     background-color: rgb(39, 39, 39);
     color: rgb(68, 84, 61);
     font-size: larger;
+    justify-content: center;
+    
 }
 
 #score {
     font-size: larger;
     margin-top: 20px;
+}
+
+.input-fields {
+    height: 20px;
+    width: 100px;
+    
+}
+
+#board-size {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-evenly;
 }

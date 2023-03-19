@@ -8,17 +8,54 @@
         <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
         <link href="https://fonts.googleapis.com/css?family=Press+Start+2P" rel="stylesheet">
     </head>
-    <body>
+    <body id="body">
         <div id="left-div"></div>
         <div id="center-div">
             <h1 id="text">SNAKE !</h1>
-            <table id="table">
-            
-            </table>
+            <div id="game-options">
+                <div class="options-div">
+                <h2>SELECT THEME</h2>
+                <div class="theme-buttons">
+                    <button class="theme-button" id="default-theme">DEFAULT</button>
+                    <button class="theme-button" id="flower-child">FLOWER CHILD</button>
+                    <button class="theme-button" id="pacman">PACMAN</button>
+                    <button class="theme-button" id="90s">90S</button>
+                    <button class="theme-button" id="glow">GLOW</button>
+                </div>
+            </div>
+            <div class="options-div">
+                <h2 id="speed">SELECT SNAKE SPEED</h2>
+                <div class="theme-buttons">
+                    <button class="theme-button" id="default-speed">DEFAULT</button>
+                    <button class="theme-button" id="super-slow-speed">SUPER SLOW</button>
+                    <button class="theme-button" id="slow-speed">SLOW</button>
+                    <button class="theme-button" id="fast-speed">FAST</button>
+                    <button class="theme-button" id="super-fast-speed">SUPER FAST</button>
+                </div>
+            </div>
+            <div class="options-div" >
+                <h2>SET # OF ROWS AND COLUMNS</h2>
+                <div class="theme-buttons" id="board-size">
+                    <div id="rows">
+                        <p>rows:</p>
+                        <input class="input-fields" id='rows-input' type="text" value = '25'>
+                    </div>
+                    <div id="columns">
+                        <p>columns:</p>
+                        <input class="input-fields" id='columns-input' type="text" value = '25'>
+                    </div>
+                </div>
+            </div>
+            </div>
+            <div id="game-div">
+                <table id="table"></table>
+            </div>
             <button id="start">START </button>
+            <button id = 'reset-button'>RESET</button>
         </div>
         <div id="right-div">
             <div id="score"></div>
+            <p id="num-segments-display"></p>
         </div>
         <script src="script.js" defer></script>
     </body>
