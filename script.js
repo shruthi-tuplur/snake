@@ -244,10 +244,10 @@ function newFood(){
     food = gameState['food'];
     let head = body[0];
     
-    if (head[0] === food[0] && head[1] === food[1] && score % 10 === 0) {
+    if (head[0] === food[0] && head[1] === food[1] && score % 40 === 0) {
         let colorSquareInd = Math.floor(Math.random() * snakeColors.length)
         foodColor = snakeColors[colorSquareInd];
-        speed -= 50;
+        
 
         while(foodColor === snakeColor){
             colorSquareInd = Math.floor(Math.random() * snakeColors.length)
